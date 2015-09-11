@@ -10,8 +10,6 @@ exports.headers = headers = {
   'Content-Type': "text/html"
 };
 
-
-
 // As you progress, keep thinking about what helper functions you can Iput
 
 exports.sendResponse = function(res, html, statusCode){
@@ -34,10 +32,6 @@ exports.sendRedirect = function(res, location, statusCode){
   res.writeHead(statusCode, {Location: location});
   res.end();
 }
-
-
-
-
 
 
 exports.serveAssets = function(res, asset, callback) {

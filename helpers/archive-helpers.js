@@ -33,11 +33,10 @@ exports.readListOfUrls = function(callback){
     if(error){
       console.error(error);
     }else{
-    var urls = text.split('\n');
-    callback(urls);
-  }
+      var urls = text.split('\n');
+      callback(urls);
+    }
   });
-
 };
 
 exports.isUrlInList = function(url, callback){
@@ -58,14 +57,11 @@ exports.addUrlToList = function(url, callback){
           callback();
         }
       });
-      //console.log('the url got appended here');
     }
   });
-  //callback();
 };
 
 exports.isUrlArchived = function(url, callback){
-
   fs.readdir(exports.paths.archivedSites, function(error, files){
     if(error){
       console.error(error);
@@ -73,24 +69,14 @@ exports.isUrlArchived = function(url, callback){
       callback(_.indexOf(files, url)!== -1);
     }
   });
-
 };
 
 exports.downloadUrls = function(urlArray){
-  //assumpltion we received url
-
-  //iterate length of urlArry
-    //create file //fs.open(path + /filename, 'w')
-    //fs.close(file)
-console.log('is running downloadUrls');
-  _.each(urlArray, function(filename) {
-
-    requestMod('http://www.google.com', function (error, response, body) {
+  _.each(urlArray, function(url) {
+    requestMod('http://' + url, function (error, response, body) {
       if (!error && response.statusCode === 200) {
-        fs.writeFile(exports.paths.archivedSites + '/' + filename, body);
+        fs.writeFile(exports.paths.archivedSites + '/' + url, body);
       }
     });
-
-
   });
 };

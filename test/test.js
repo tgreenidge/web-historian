@@ -64,10 +64,7 @@ describe("server", function() {
           .send({ url: url })
           .expect(302, function (err) {
             if (!err) {
-              console.log(archive.paths.list); // delete later
-              console.log('about to read file here');
               var fileContents = fs.readFileSync(archive.paths.list, 'utf8');
-              console.log('filecontents:'+fileContents); // delete later
               expect(fileContents).to.equal(url + "\n");
             }
 
